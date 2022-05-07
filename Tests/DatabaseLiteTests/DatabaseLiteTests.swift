@@ -35,6 +35,7 @@ struct TestTable: DLTablable {
     let download: Double
     let upload: Double
     let status: String
+    let startedAt: TimeInterval
     
     enum CodingKeys: String, CodingKey {
         case rowId = "_id"
@@ -42,6 +43,7 @@ struct TestTable: DLTablable {
         case download = "T1"
         case upload = "T2"
         case status = "S"
+        case startedAt = "S-A"
     }
     
     public func inspect() -> String {
@@ -51,7 +53,12 @@ struct TestTable: DLTablable {
     }
 
     static func make() -> TestTable {
-        TestTable(rowId: .toBeDefined, timestamp: 2000.randomRoll, download: 300.0.randomRoll, upload: 200.0.randomRoll, status: String.randomRoll(["Success", "Failure"]))
+        TestTable(rowId: .toBeDefined,
+                  timestamp: 2000.randomRoll,
+                  download: 300.0.randomRoll,
+                  upload: 200.0.randomRoll,
+                  status: String.randomRoll(["Success", "Failure"]),
+                  startedAt: 1000.randomRoll)
     }
 }
 
@@ -89,6 +96,7 @@ final class DatabaseLiteTests: XCTestCase {
             XCTAssertEqual(exp.download, other.download)
             XCTAssertEqual(exp.upload, other.upload)
             XCTAssertEqual(exp.status, other.status)
+            XCTAssertEqual(exp.startedAt, other.startedAt)
         }
     }
     

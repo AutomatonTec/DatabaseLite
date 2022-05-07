@@ -7,13 +7,23 @@
 
 import Foundation
 
+extension String {
+    var columnName : String {
+        return "`\(self)`"
+    }
+}
+
 public struct DLColumn: CustomStringConvertible {
-    let name: String
+    fileprivate let raw: String
     let isOptional: Bool
     let type: Any.Type
-    
+
+    var name: String {
+        return raw.columnName
+    }
+
     public var description: String {
-        return "\(name): \(type)\(isOptional ? "?" : "")"
+        return "\(raw): \(type)\(isOptional ? "?" : "")"
     }
 }
 
@@ -64,7 +74,7 @@ public class DLColumnNamesReader<K: CodingKey>: KeyedDecodingContainerProtocol {
     public func appendKey(_ key:Key, _ type:Any.Type) {
         let name = key.stringValue
         if !knownKeys.contains(name) {
-            parent.collected.append(DLColumn(name: name, isOptional: isOptional, type: type))
+            parent.collected.append(DLColumn(raw: name, isOptional: isOptional, type: type))
             knownKeys.insert(name)
         }
         isOptional = false

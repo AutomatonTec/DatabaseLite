@@ -35,71 +35,74 @@ public struct DLBinding : CustomStringConvertible {
             }
         }
     }
-    let column: String
+    fileprivate let raw: String
+    var column : String {
+        return raw.columnName
+    }
     let flavour: Flavour
     
     public var description: String {
-        return column + ": " + flavour.description
+        return raw + ": " + flavour.description
     }
     
     public init(_ col:String) {
-        column = col
+        raw = col
         flavour = .null
     }
     public init(_ col: String, _ value:Bool) {
-        column = col
+        raw = col
         flavour = .bool(value)
     }
     public init(_ col: String, _ value:Int) {
-        column = col
+        raw = col
         flavour = .signed(Int64(value))
     }
     public init(_ col: String, _ value:Int8) {
-        column = col
+        raw = col
         flavour = .signed(Int64(value))
     }
     public init(_ col: String, _ value:Int16) {
-        column = col
+        raw = col
         flavour = .signed(Int64(value))
     }
     public init(_ col: String, _ value:Int32) {
-        column = col
+        raw = col
         flavour = .signed(Int64(value))
     }
     public init(_ col: String, _ value:Int64) {
-        column = col
+        raw = col
         flavour = .signed(value)
     }
     public init(_ col: String, _ value:UInt) {
-        column = col
+        raw = col
         flavour = .unsigned(UInt64(value))
     }
     public init(_ col: String, _ value:UInt8) {
-        column = col
+        raw = col
         flavour = .unsigned(UInt64(value))
     }
     public init(_ col: String, _ value:UInt16) {
-        column = col
+        raw = col
         flavour = .unsigned(UInt64(value))
     }
     public init(_ col: String, _ value:UInt32) {
-        column = col
+        raw = col
         flavour = .unsigned(UInt64(value))
     }
     public init(_ col: String, _ value:UInt64) {
-        column = col
+        raw = col
         flavour = .unsigned(value)
     }
     public init(_ col: String, _ value:Double) {
-        column = col
+        raw = col
         flavour = .real(value)
     }
     public init(_ col: String, _ value:Float) {
-        column = col
+        raw = col
         flavour = .real(Double(value))
     }
     public init(_ col: String, _ value:String) {
-        column = col
+        raw = col
         flavour = .text(value)
     }
 
