@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    var columnName : String {
+    public var sqliteName : String {
         return "`\(self)`"
     }
 }
@@ -19,7 +19,7 @@ public struct DLColumn: CustomStringConvertible {
     let type: Any.Type
 
     var name: String {
-        return raw.columnName
+        return raw.sqliteName
     }
 
     public var description: String {

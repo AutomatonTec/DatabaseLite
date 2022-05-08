@@ -37,7 +37,7 @@ public struct DLBinding : CustomStringConvertible {
     }
     fileprivate let raw: String
     var column : String {
-        return raw.columnName
+        return raw.sqliteName
     }
     let flavour: Flavour
     
